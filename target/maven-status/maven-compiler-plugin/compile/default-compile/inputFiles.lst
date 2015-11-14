@@ -1,0 +1,10 @@
+/home/splogad/Documents/workspace-sts-3.7.1.RELEASE/myapp/src/main/java/com/splogad/myapp/controllers/RootController.java
+/home/splogad/Documents/workspace-sts-3.7.1.RELEASE/myapp/src/main/java/com/splogad/myapp/email/EmailSender.java
+/home/splogad/Documents/workspace-sts-3.7.1.RELEASE/myapp/src/main/java/com/splogad/myapp/entities/User.java
+/home/splogad/Documents/workspace-sts-3.7.1.RELEASE/myapp/src/main/java/com/splogad/myapp/repositories/UserRepository.java
+/home/splogad/Documents/workspace-sts-3.7.1.RELEASE/myapp/src/main/java/com/splogad/myapp/dto/SignupForm.java
+/home/splogad/Documents/workspace-sts-3.7.1.RELEASE/myapp/src/main/java/com/splogad/myapp/MyappApplication.java
+/home/splogad/Documents/workspace-sts-3.7.1.RELEASE/myapp/src/main/java/com/splogad/myapp/config/MvcConfig.java
+/home/splogad/Documents/workspace-sts-3.7.1.RELEASE/myapp/src/main/java/com/splogad/myapp/EmailConfig.java
+/home/splogad/Documents/workspace-sts-3.7.1.RELEASE/myapp/src/main/java/com/splogad/myapp/email/MockEmailSender.java
+/home/splogad/Documents/workspace-sts-3.7.1.RELEASE/myapp/src/main/java/com/splogad/myapp/email/MockEmailSender2.java
