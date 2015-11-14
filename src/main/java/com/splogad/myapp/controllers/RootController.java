@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,24 +29,25 @@ import com.splogad.myapp.email.MockEmailSender;
 import com.splogad.myapp.repositories.UserRepository;
 import com.splogad.myapp.services.UserService;
 import com.splogad.myapp.util.messageUtil;
+import com.splogad.myapp.validation.SignupFormValidator;
 
 @Controller //@RestController
 public class RootController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(RootController.class);
 	
+	private SignupFormValidator signupFormValidator; 
 	@Value("${spring.profiles.active}")
 	private String profile;
-
 	private UserService userService;
-	
 	//@Resource	//(name="MockEmailSender2")
 	private EmailSender em;
 	
 	@Autowired
-	public RootController(EmailSender em, UserService userService){
+	public RootController(EmailSender em, UserService userService,SignupFormValidator signupFormValidator){
 		this.em = em;
 		this.userService = userService;
+		this.signupFormValidator=signupFormValidator;
 	}
 		
 //	@RequestMapping("/")
@@ -61,6 +64,10 @@ public class RootController {
 		return "signup";
 	}	
 
+	@InitBinder("signupForm")
+	protected void initSignupBinder (WebDataBinder binder){
+		binder.setValidator(signupFormValidator);
+	}
 	
 	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
