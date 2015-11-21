@@ -2,6 +2,5 @@
 <div class="container">
 	<p>
 		<spring:message code="hello" />
-	</p>
-</div>
+	</p>	
 <%@include file="includes/footer.jsp"%>

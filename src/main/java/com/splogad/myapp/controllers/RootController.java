@@ -86,10 +86,10 @@ public class RootController {
 		return "redirect:/";
 	}	
 	
-	@RequestMapping("/welcome")
-	public String welcome(){
+	@RequestMapping("/search")
+	public String search(){
 		
-		return "welcome";
+		return "search";
 	}
 
 }
