@@ -1,9 +1,11 @@
 package com.splogad.myapp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +20,13 @@ import com.splogad.myapp.repositories.UserRepository;
 public class UserServiceImpl implements UserService, UserDetailsService{
 	
 	private UserRepository userRepo;
+	private BCryptPasswordEncoder passEncoder;
 	
 	@Autowired
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository, 
+			BCryptPasswordEncoder passEncoder) {
 		this.userRepo = userRepository;
+		this.passEncoder = passEncoder;
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED, readOnly = false)
@@ -31,7 +36,7 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 		User user = new User();
 		user.setEmail(signupForm.getEmail());
 		user.setName(signupForm.getName());
-		user.setPassword(signupForm.getPassword());
+		user.setPassword(passEncoder.encode(signupForm.getPassword()));
 		
 		userRepo.save(user);
 		//int j = 20/0;

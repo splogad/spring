@@ -56,39 +56,42 @@
 				</form>
 
 				<ul class="nav navbar-nav navbar-right">
-					<c:if test="${pageContext.request.userPrincipal.name != null}">
-						<li><a href="#"> Welcome :
-								${pageContext.request.userPrincipal.name} </a></li>
-					</c:if>
+					<sec:authorize access="isAnonymous()">
+						<!-- se anonymo mostrami i link di login e registrazione -->
+						<li><a href="<c:url value='/login'/>"><span
+								class="glyphicon glyphicon-log-in">&nbsp;</span>Login</a></li>
+						<li><a href="<c:url value='/signup'/>"><span
+								class="glyphiconglyphicon-log-in">&nbsp;</span>SignUp</a></li>
+					</sec:authorize>
 
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Account <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<sec:authorize access="isAnonymous()"><!-- se anonymo mostrami i link di login e registrazione -->
-								<li><a href="<c:url value='/login'/>"><span
-										class="glyphicon glyphicon-log-in">&nbsp;</span>Login</a></li>
-								<li><a href="<c:url value='/signup'/><span>
-											class="glyphicon glyphicon-log-in">&nbsp;</span>Sign Up</a></li>
-							</sec:authorize>
-							<sec:authorize access="isAuthenticated()"><!-- Se autenticato mostra il logout -->
+					<sec:authorize access="isAuthenticated()">
+						<li class="dropdown"> 
+								<c:if
+									test="${pageContext.request.userPrincipal.name != null}">
+									<a href="#" href="#" class="dropdown-toggle"
+										data-toggle="dropdown" role="button" aria-haspopup="true"
+										aria-expanded="false">
+										${pageContext.request.userPrincipal.name}
+										<span class="caret"></span></a>
+								</c:if> 
+							<ul class="dropdown-menu">
+
+
+								<!-- Se autenticato mostra il logout -->
 								<li><c:url var="logoutVar" value="/Logout" /> <form:form
 										id="logoutForm" action="${logoutVar}" method="post">
 									</form:form> <a href="#"
 									onclick="document.getElementById('logoutForm').submit()"> <span
 										class="glyphicon glyphicon-log-out">&nbsp;</span> Log Out
 								</a></li>
-							</sec:authorize>
-						</ul>
-					</li>
+
+							</ul></li>
+					</sec:authorize>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid --> </nav>
-	</div>
-
-	<div class="container">
 		<c:if test="${not empty flashMessage}">
 			<div class="alert alert-${flashKind} alert-dismissable">
 				<button type="button" class="close" data-dismiss="alsert"
